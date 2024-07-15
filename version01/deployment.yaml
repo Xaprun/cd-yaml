@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: example-app
+        app: nginx-basic-deployment
     spec:
       containers:
         - name: example-container
