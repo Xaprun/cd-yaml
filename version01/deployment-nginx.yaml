@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: example-container
-          image: nginx:latest
+          image: xaprun/nginx-html:v1.0
           ports:
             - containerPort: 80
