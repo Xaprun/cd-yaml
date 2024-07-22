@@ -11,10 +11,10 @@ spec:
   template:
     metadata:
       labels:
-        app:dotnet-redapp
+        app: dotnet-redapp
     spec:
       containers:
-      - name: dotnet-redapp
+      - name: dotnet-redapp-container
         image: xaprun/aj-aspnetapp:2.0
         ports:
         - containerPort: 8080
