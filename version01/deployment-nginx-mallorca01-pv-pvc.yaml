@@ -20,8 +20,6 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-          - mountPath: /etc/nginx/conf.d
-            name: azurefile-config
           - mountPath: /var/log/nginx
             name: azurefile-logs
             subPath: nginx/logs
