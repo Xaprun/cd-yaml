@@ -7,15 +7,27 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: example-app
-      env: dev
+      app: nginx-basic
   template:
     metadata:
       labels:
-        app: example-app
+        app: nginx-basic
+        env: stag
     spec:
       containers:
         - name: example-container
           image: xaprun/nginx-html:v1.0
           ports:
             - containerPort: 80
+      volumes:
+      - name: azurefile-config
+        persistentVolumeClaim:
+          claimName: azurefile-pvc
+      - name: azurefile-logs
+        persistentVolumeClaim:
+          claimName: azurefile-pvc
+          
+
+
+
+
