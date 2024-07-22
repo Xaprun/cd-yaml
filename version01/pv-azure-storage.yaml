@@ -11,3 +11,4 @@ spec:
     secretName: fs-secret
     shareName: aksfs
     readOnly: false
+  storageClassName: ""
