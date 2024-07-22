@@ -12,7 +12,6 @@ spec:
     metadata:
       labels:
         app: nginx-basic
-        env: stag
     spec:
       containers:
         - name: example-container
@@ -20,14 +19,14 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
+          - mountPath: /etc/nginx/conf.d
+            name: azurefile-nginx
+            subPath: nginx/conf
           - mountPath: /var/log/nginx
-            name: azurefile-logs
+            name: azurefile-nginx
             subPath: nginx/logs
       volumes:
-      - name: azurefile-config
-        persistentVolumeClaim:
-          claimName: azurefile-pvc
-      - name: azurefile-logs
+      - name: azurefile-nginx
         persistentVolumeClaim:
           claimName: azurefile-pvc
           
