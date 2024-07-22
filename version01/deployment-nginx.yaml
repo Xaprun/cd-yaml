@@ -14,6 +14,15 @@ spec:
         app: nginx-basic
         env: stag
     spec:
+      initContainers:
+      - name: init-container
+        image: busybox
+        command: ['sh', '-c', 'mkdir -p /mnt/azure/config && mkdir -p /mnt/azure/logs']
+        volumeMounts:
+        - mountPath: /mnt/azure/config
+          name: azurefile-config
+        - mountPath: /mnt/azure/logs
+          name: azurefile-logs
       containers:
         - name: example-container
           image: xaprun/nginx-html:v1.0
