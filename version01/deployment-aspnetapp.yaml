@@ -4,11 +4,10 @@ metadata:
   name: aspnetapp-deployment
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: aspnetapp
-      env: stag
   template:
     metadata:
       labels:
@@ -16,6 +15,6 @@ spec:
     spec:
       containers:
         - name: aj-aspnetapp-alpine
-          image: xaprun/aj-aspnetapp-alpine-k8s-gh:latest
+          image: xaprun/aj-aspnetapp-alpine-k8s-gh:v0.9-test
           ports:
             - containerPort: 8080
