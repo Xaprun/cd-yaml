@@ -8,18 +8,14 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
-  tls:
-  - hosts:
-    - myapp.example.com
-    secretName: tls-secret
   rules:
-    http:
+  - http:
       paths:
-      - path: /front
+      - path: /frontend
         pathType: Prefix
         backend:
           service:
             name: node-mongoapp-svc
+            namespace: dev
             port:
               number: 80
-
