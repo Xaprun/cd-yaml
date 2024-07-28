@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: node-mongoapp
-        image: xaprun/aj-node-mongoapp:1.2-purplek8 # Replace with your Docker Hub image or ACR image
+        image: xaprun/aj-node-mongoapp:1.2.1-purplek8 # Replace with your Docker Hub image or ACR image
         ports:
         - containerPort: 8080
         env:
