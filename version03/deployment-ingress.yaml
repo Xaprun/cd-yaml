@@ -11,7 +11,15 @@ spec:
   rules:
   - http:
       paths:
-      - path: /frontend
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: node-mongoapp-svc
+            namespace: dev
+            port:
+              number: 80
+      - path: /env
         pathType: Prefix
         backend:
           service:
