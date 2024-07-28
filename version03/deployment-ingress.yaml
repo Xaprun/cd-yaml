@@ -13,10 +13,9 @@ spec:
     - myapp.example.com
     secretName: tls-secret
   rules:
-  - host: myapp.example.com
     http:
       paths:
-      - path: /frontend
+      - path: /front
         pathType: Prefix
         backend:
           service:
