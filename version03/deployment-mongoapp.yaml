@@ -18,6 +18,13 @@ spec:
         image: xaprun/aj-node-mongoapp:1.2.6-purplek8 # Replace with your Docker Hub image or ACR image
         ports:
         - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "200Mi"
+          limits:
+            cpu: "500m"
+            memory: "500Mi"
         env:
         - name: MONGO_URL
         #  value: "mongodb://root:example@mongo-0.mongo-service:27017/mydb?authSource=admin,mongodb://root:example@mongo-1.mongo-service:27017/mydb?authSource=admin"
