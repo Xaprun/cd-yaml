@@ -15,17 +15,22 @@ spec:
     spec:
       containers:
       - name: node-mongoapp
-        image: xaprun/aj-node-mongoapp:1.1-purple # Replace with your Docker Hub image or ACR image
+        image: xaprun/aj-node-mongoapp:1.2-purplek8 # Replace with your Docker Hub image or ACR image
         ports:
         - containerPort: 8080
         env:
         - name: MONGO_URL
-          value: "mongodb://root:example@mongo-0.mongo-service:27017/mydb?authSource=admin,mongodb://root:example@mongo-1.mongo-service:27017/mydb?authSource=admin"
+        #  value: "mongodb://root:example@mongo-0.mongo-service:27017/mydb?authSource=admin,mongodb://root:example@mongo-1.mongo-service:27017/mydb?authSource=admin"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-uri
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: node-mongoapp-svc
+  namespace: dev
 spec:
   selector:
     app: node-mongoapp
