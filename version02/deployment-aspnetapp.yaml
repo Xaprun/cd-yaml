@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspnetapp-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aspnetapp
+  template:
+    metadata:
+      labels:
+        app: aspnetapp
+    spec:
+      containers:
+        - name: aj-aspnetapp-alpine
+          image: xaprun/aj-aspnetapp-alpine-k8s-gh:v0.9-test
+          ports:
+            - containerPort: 8080

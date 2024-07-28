@@ -18,17 +18,6 @@ spec:
           image: xaprun/nginx-html:v1.0
           ports:
             - containerPort: 80
-          volumeMounts:
-          - mountPath: /etc/nginx/conf.d
-            name: azurefile-nginx
-            subPath: nginx/conf
-          - mountPath: /var/log/nginx
-            name: azurefile-nginx
-            subPath: nginx/logs
-      volumes:
-      - name: azurefile-nginx
-        persistentVolumeClaim:
-          claimName: azurefile-pvc
           
 
 

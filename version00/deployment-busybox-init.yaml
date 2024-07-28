@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-basic-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-basic
+  template:
+    metadata:
+      labels:
+        app: nginx-basic
+        env: stag
+    spec:
+      initContainers:
+      - name: init-container
+        image: busybox
+        command: ['sh', '-c', 'mkdir -p /mnt/azure/config && mkdir -p /mnt/azure/logs']
+        volumeMounts:
+        - mountPath: /mnt/azure/config
+          name: azurefile-config
+        - mountPath: /mnt/azure/logs
+          name: azurefile-logs
+      containers:
+        - name: example-container
+          image: xaprun/nginx-html:v1.0
+          ports:
+            - containerPort: 80
+          volumeMounts:
+          - mountPath: /etc/nginx/temp-conf.d
+            name: azurefile-config
+          - mountPath: /var/log/nginx
+            name: azurefile-logs
+      volumes:
+      - name: azurefile-config
+        persistentVolumeClaim:
+          claimName: azurefile-pvc
+      - name: azurefile-logs
+        persistentVolumeClaim:
+          claimName: azurefile-pvc
+
+
+
+
+
+
+
+
+
+
