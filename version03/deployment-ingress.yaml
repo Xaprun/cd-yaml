@@ -11,7 +11,7 @@ metadata:
   name: my-ingress
   namespace: dev
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    # nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
@@ -35,3 +35,6 @@ spec:
             namespace: dev
             port:
               number: 80
+         # Dodaj rewrite-target dla ścieżki /env
+        # annotations:
+         # nginx.ingress.kubernetes.io/rewrite-target: /env
