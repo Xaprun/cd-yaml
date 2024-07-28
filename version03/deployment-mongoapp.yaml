@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-mongoapp-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-mongoapp
+  template:
+    metadata:
+      labels:
+        app: node-mongoapp
+    spec:
+      containers:
+      - name: node-mongoapp
+        image: xaprun/aj-node-mongoapp:1.1-purple # Replace with your Docker Hub image or ACR image
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_URL
+          value: "mongodb://root:example@mongo-0.mongo-service:27017/mydb?authSource=admin,mongodb://root:example@mongo-1.mongo-service:27017/mydb?authSource=admin"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-mongoapp-svc
+spec:
+  selector:
+    app: node-mongoapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
