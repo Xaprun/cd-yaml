@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-mongoapp-deployment-green
+  namespace: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-mongoapp
+  template:
+    metadata:
+      labels:
+        app: node-mongoapp
+    spec:
+      containers:
+      - name: node-mongoapp
+        image: xaprun/aj-node-redisapp:1.0-green # Replace with your Docker Hub image or ACR image
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "200Mi"
+          limits:
+            cpu: "500m"
+            memory: "500Mi"
+        env:
+        - name: MONGO_URL
+        #  value: "mongodb://root:example@mongo-0.mongo-service:27017/mydb?authSource=admin,mongodb://root:example@mongo-1.mongo-service:27017/mydb?authSource=admin"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-uri
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-mongoapp-svc
+  namespace: dev
+spec:
+  selector:
+    app: node-mongoapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+#
