@@ -43,7 +43,7 @@ metadata:
 spec:
   selector:
     app: node-mongoapp
-    env: stag
+#    env: stag
   ports:
     - protocol: TCP
       port: 80
