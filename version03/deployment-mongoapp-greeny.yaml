@@ -32,18 +32,3 @@ spec:
             secretKeyRef:
               name: mongo-secret
               key: mongo-uri
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: node-mongoapp-svc
-  namespace: dev
-spec:
-  selector:
-    app: node-mongoapp
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: ClusterIP
-#
