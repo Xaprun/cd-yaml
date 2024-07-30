@@ -8,10 +8,12 @@ spec:
   selector:
     matchLabels:
       app: node-mongoapp
+      env: stag
   template:
     metadata:
       labels:
         app: node-mongoapp
+        env: stag
     spec:
       containers:
       - name: node-mongoapp
@@ -41,6 +43,7 @@ metadata:
 spec:
   selector:
     app: node-mongoapp
+    env: stag
   ports:
     - protocol: TCP
       port: 80
